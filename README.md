@@ -1,0 +1,22 @@
+# Description
+Repository contains docker configuration for different purposes.
+
+# Containers
+
+## iscsi
+Runs iscsi with 20GB disk.
+To build the image use following command:
+```
+docker build -t iscsi:latest iscsi/
+```
+
+Then, you can run it using following command:
+```
+docker run --privileged --rm --network=host iscsi
+```
+Target name is `iqn.2019-11.iscsi.test:for.test` and is configured in `iscsi/iscsi-target.conf`.
+
+To test with qemu and ibft:
+1. Download or build ipxe binary, see https://ipxe.org/download
+2. When running qemu point it too ipxe kernel
+3. Set as kernel args `dhcp && sanhook iscsi:192.168.122.1::3260:1:iqn.2019-11.iscsi.test:for.test` (e.g. using -append option)
