@@ -12,7 +12,7 @@ docker build -t iscsi:latest iscsi/
 
 Then, you can run it using following command:
 ```
-docker run --privileged --rm --network=host iscsi
+docker run --privileged --rm -p 3260:3260 iscsi
 ```
 Target name is `iqn.2019-11.iscsi.test:for.test` and is configured in `iscsi/iscsi-target.conf`.
 
