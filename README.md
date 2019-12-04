@@ -5,7 +5,7 @@ Repository contains docker configuration for different purposes.
 
 ## iscsi
 Runs iscsi with 20GB disk.
-This requires running `dd if=/dev/zero of=/opt/iscsi-disk seek=1M bs=2480 count=1` on the host.
+This requires running `dd if=/dev/zero of=/opt/iscsi-disk seek=1M bs=20480 count=1` on the host.
 
 To build the image use following command:
 ```
@@ -14,7 +14,7 @@ docker build -t iscsi:latest iscsi/
 
 Then, you can run it using following command:
 ```
-docker run --privileged --rm --network=host -v /opt/iscsi-disk:/opt/iscsi-disk--name iscsi iscsi
+docker run --privileged --rm --network=host -v /opt/iscsi-disk:/opt/iscsi-disk --name iscsi iscsi
 ```
 Target name is `iqn.2019-11.iscsi.test:for.test` and is configured in `iscsi/iscsi-target.conf`.
 
