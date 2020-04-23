@@ -23,5 +23,9 @@ To test with qemu and ibft:
 2. When running qemu point it too ipxe kernel
 3. Set as kernel args `dhcp && sanhook iscsi:192.168.122.1::3260:1:iqn.2019-11.iscsi.test:for.test` (e.g. using -append option)
 
+
+In order to mount disk, run `iscsiadm -m node -T "iqn.2019-11.iscsi.test:for.test" -p "localhost:3260" --login`
+After that disk should be visible in the system and can be mounted and formatted as usual.
+
 Test created target with:
 `iscsiadm -m discovery -t st -p localhost:3260`
