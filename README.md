@@ -29,3 +29,25 @@ After that disk should be visible in the system and can be mounted and formatted
 
 Test created target with:
 `iscsiadm -m discovery -t st -p localhost:3260`
+
+## nfs
+Simple nfs share with v3 support and rw share.
+
+Before starting the container, kernel modules should be enabled on the host:
+```
+modprobe nfs
+modprobe nfsd
+```
+
+Then build image using following command:
+```
+docker build -t nfs:latest nfs
+```
+
+Start container with:
+```
+docker run --privileged --rm --network=host --name nfs nfs
+```
+
+Due to requirement to have kernel modules enabled, we have to add `--privileged`
+option here.
