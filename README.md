@@ -60,3 +60,6 @@ docker run --privileged --rm --network=host --name nfs nfs
 
 Due to requirement to have kernel modules enabled, we have to add `--privileged`
 option here.
+
+By default, `/export/data` directory will be shared, use `-v` option to map
+other directory.
