@@ -12,4 +12,4 @@ EXPOSE 3260
 VOLUME ["/opt/iscsi-disk"]
 
 # Start daemon and reload config. Keep container running as long as service is alive
-CMD service nfs-server start; while pgrep nfsd &> /dev/null; do sleep 100; done
+CMD /usr/sbin/tgtd && tgt-admin --update ALL --force; while pgrep tgtd &> /dev/null; do sleep 100; done
