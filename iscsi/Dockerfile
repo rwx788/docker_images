@@ -1,7 +1,7 @@
 FROM registry.opensuse.org/opensuse/tumbleweed:latest
 
 ENV LANG="en_US.UTF-8"
-RUN zypper --non-interactive in --no-recommends ref tgt
+RUN zypper ref; zypper --non-interactive in --no-recommends tgt
 
 # Add config for the target
 ADD iscsi-target.conf /etc/tgt/conf.d
