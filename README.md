@@ -1,12 +1,3 @@
-<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
-
-- [Description](#description)
-- [Containers](#containers)
-	- [iscsi](#iscsi)
-	- [nfs](#nfs)
-
-<!-- /TOC -->
-
 # Description
 Repository contains docker configuration for different purposes.
 
@@ -63,3 +54,22 @@ option here.
 
 By default, `/export/data` directory will be shared, use `-v` option to map
 other directory.
+
+## tinyproxy
+Simple tinyproxy image, without authentication.
+In order to enable basic authentication, setup it as follows in tiny.conf:
+```
+BasicAuth user password
+```
+Container has port 8888 and allows all connections, which is default behavior
+if no `Allow` entries exist in the config file.
+
+Then build image using following command:
+```
+docker build . --tag tinyproxy:latest
+```
+
+Start container with:
+```
+docker run -p 8888:8888 --name tinyproxy tinyproxy:latest
+```
