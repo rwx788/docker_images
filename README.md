@@ -1,9 +1,10 @@
 ## Table of Contents
 * [Description](#description)
 * [Containers](#containers)
-    * [iscsi](#iscsi)
-    * [nfs](#nfs)
-    * [tinyproxy](#tinyproxy)
+  * [iscsi](#iscsi)
+  * [nfs](#nfs)
+  * [samba](#samba-without-netbios)
+  * [tinyproxy](#tinyproxy)
 
 # Description
 Repository contains docker configuration for different purposes.
@@ -61,6 +62,43 @@ option here.
 
 By default, `/export/data` directory will be shared, use `-v` option to map
 other directory.
+
+## samba (without netbios)
+Simple file sharing over samba protocol without netbios.
+See `smb.conf` file for more details.
+
+By default shared directory is called `Shared` and can be accessed by guest user
+and is writable. On top there is `smbuser` with password `smbuser`, in case
+access with authentication has to be tested.
+Container can be build using following command:
+```
+docker build -t samba:latest samba
+```
+
+Define folder to share and forward port 445 when run the container:
+```
+docker run --name samba -p 445:445 -v /share:/share samba
+```
+
+After that you can mount it using following command:
+```
+mount -t cifs -o username=guest,password="" //192.168.99.1/Shared /mnt/smb
+```
+
+On macOS, one can use `mount_smbfs` command:
+```
+mount_smbfs -N //guest@192.168.99.1/Shared /mnt/smb
+```
+
+In case you want to run container with privileged network, it's strongly
+recommended to add access control to the `[global]` section of the `smb.cfg`
+file, e.g.:
+```
+hosts allow = 192.168.99.0/24 10.0.0.0/24
+hosts deny = 0.0.0.0/0
+interfaces = 192.168.99.0/24 10.0.0.0/24
+bind interfaces only = yes
+```
 
 ## tinyproxy
 Simple tinyproxy image, without authentication.
