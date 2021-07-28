@@ -19,5 +19,5 @@ RUN addgroup -S smb && \
 COPY smb.conf /etc/samba/smb.conf
 EXPOSE 445/tcp
 
-# Start daemon and reload config. Keep container running as long as service is alive
+# Start smb daemon. Keep container running as long as service is alive
 CMD /usr/sbin/smbd; while pgrep smbd &> /dev/null; do sleep 100; done
