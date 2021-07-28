@@ -4,12 +4,8 @@
 
 FROM alpine
 
-RUN apk add --update \
-    bash \
-    samba-common-tools \
-    samba-client \
-    samba-server \
-    && rm -rf /var/cache/apk/*
+RUN apk --no-cache --no-progress upgrade && \
+    apk add --no-cache --no-progress bash samba-common-tools samba-client samba-server
 
 # Create smb group, smduser, set password to "smbuser" and add smbuser to smb group
 RUN addgroup -S smb && \
