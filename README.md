@@ -8,11 +8,15 @@
   * [tinyproxy](#tinyproxy)
 
 # Description
+
 Repository contains docker configuration for different purposes.
+
 
 # Containers
 
+
 ## iscsi
+
 Runs iscsi with 20GB disk.
 This requires running `dd if=/dev/zero of=/opt/iscsi-disk seek=1M bs=20480 count=1` on the host.
 
@@ -39,7 +43,9 @@ After that disk should be visible in the system and can be mounted and formatted
 Test created target with:
 `iscsiadm -m discovery -t st -p localhost:3260`
 
+
 ## nfs
+
 Simple nfs share with v3 support and rw share.
 
 Before starting the container, kernel modules should be enabled on the host:
@@ -79,6 +85,7 @@ is set using `POSTGRES_PASSWORD` environmental variable.
 
 
 ## samba (without netbios)
+
 Simple file sharing over samba protocol without netbios.
 See `smb.conf` file for more details.
 
@@ -115,7 +122,9 @@ interfaces = 192.168.99.0/24 10.0.0.0/24
 bind interfaces only = yes
 ```
 
+
 ## tinyproxy
+
 Simple tinyproxy image, without authentication.
 In order to enable basic authentication, setup it as follows in tiny.conf:
 ```
