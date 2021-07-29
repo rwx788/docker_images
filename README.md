@@ -3,6 +3,7 @@
 * [Containers](#containers)
   * [iscsi](#iscsi)
   * [nfs](#nfs)
+  * [postgres](#postgres)
   * [samba](#samba-without-netbios)
   * [tinyproxy](#tinyproxy)
 
@@ -62,6 +63,20 @@ option here.
 
 By default, `/export/data` directory will be shared, use `-v` option to map
 other directory.
+
+
+## postgres
+
+PostgreSQL containers available on docker hub do not need any modifications
+to be used for testing purposes, see https://hub.docker.com/_/postgres
+
+Database can be started using following command:
+```
+docker run --name postgres -d -p 5432:5432 -e POSTGRES_PASSWORD=nots3cr3t postgres
+```
+It will spawn postgres instance with default user (postgres) and password which
+is set using `POSTGRES_PASSWORD` environmental variable.
+
 
 ## samba (without netbios)
 Simple file sharing over samba protocol without netbios.
